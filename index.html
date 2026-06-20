@@ -141,6 +141,7 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
         @keyframes ringIn {
             from {
                 transform: scale(.3);
@@ -1744,6 +1745,7 @@
 
         function App() {
             const [screen, setScreen] = useState('loading');
+            const [slowLoad, setSlowLoad] = useState(false);
             const [transfers, setTransfers] = useState([]);
             const [balances, setBalances] = useState({});
             const [selAcc, setSelAcc] = useState(null);
@@ -1754,11 +1756,14 @@
             const go = s => setScreen(s);
 
             useEffect(() => {
+                const slowTimer = setTimeout(() => setSlowLoad(true), 3500);
                 serverLoad().then(({ transfers, balances }) => {
+                    clearTimeout(slowTimer);
                     setTransfers(transfers);
                     setBalances(balances);
                     setScreen('splash');
                 });
+                return () => clearTimeout(slowTimer);
             }, []);
 
             useEffect(() => {
@@ -1781,7 +1786,20 @@
 
             return (
                 <div style={{ position: 'fixed', top: 0, left: 0, right: 0, height: '100svh', overflow: 'hidden', background: 'white', maxWidth: 430, margin: '0 auto' }}>
-                    {screen === 'loading' && <div className="fixed inset-0 bg-white flex items-center justify-center"><img src="./logo.svg" width={120} style={{ objectFit: 'contain' }} alt="" /></div>}
+                    {screen === 'loading' && (
+                        <div className="fixed inset-0 bg-white flex flex-col items-center justify-center">
+                            <img src="./logo.svg" width={120} style={{ objectFit: 'contain' }} alt=""
+                                 onError={e => { e.target.style.display = 'none'; }} />
+                            <div style={{ marginTop: 30, width: 30, height: 30, borderRadius: '50%',
+                                          border: '3px solid #e5e5ea', borderTopColor: '#2DB34A',
+                                          animation: 'spin .8s linear infinite' }} />
+                            {slowLoad && (
+                                <p style={{ marginTop: 18, fontSize: 13, color: '#8e8e93', textAlign: 'center', padding: '0 30px' }}>
+                                    Connexion au serveur en cours…
+                                </p>
+                            )}
+                        </div>
+                    )}
                     {screen === 'splash' && <SplashScreen onDone={() => go('welcome')} />}
                     {screen === 'welcome' && <WelcomeScreen onConnect={() => go('pin')} onScanner={() => setShowScanner(true)} />}
                     {screen === 'pin' && <PinScreen onBack={() => go('welcome')} onSuccess={() => go('dashboard')} />}
