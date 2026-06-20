@@ -80,7 +80,7 @@
  
 <body>
     <div id="root"></div>
-    <script type="text/babel">
+    <script type="text/babel-source" id="app-source">
         const { useState, useMemo, useEffect } = React;
  
         const ADMIN_AUTH_KEY = 'bnp_admin_token';
@@ -519,6 +519,17 @@
         }
  
         ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script>
+        (function () {{
+            var src = document.getElementById('app-source').textContent;
+            var out = Babel.transform(src, {{
+                presets: [['react', {{ runtime: 'classic' }}]]
+            }}).code;
+            var s = document.createElement('script');
+            s.textContent = out;
+            document.body.appendChild(s);
+        }})();
     </script>
 </body>
  
