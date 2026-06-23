@@ -6,6 +6,7 @@
     <meta name="viewport"
         content="width=device-width,initial-scale=1.0,viewport-fit=cover,maximum-scale=1.0,user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>Easy Banking</title>
     <link rel="apple-touch-icon" href="./favicon.png" />
@@ -190,9 +191,8 @@
     <div id="root"></div>
     <script type="text/babel-source" id="app-source">
         const { useState, useEffect, useMemo } = React;
-        const HELLO_BANK_LOGO = "https://imgs.search.brave.com/WdaYtf9yCB59KHnyYxN3AlpOHIOqNtFHy1TkZ2tR53I/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9sb2dvbG9vay5uZXQvd3AtY29udGVudC91cGxvYWRzLzIwMjMvMTIvQk5QLVBhcmliYXMtTG9nby0yMDAwLTUwMHgyODEucG5n";
-
-
+        // Logo BNP Paribas en Base64 (petite version pour PDF et aperçu)
+        const HELLO_BANK_LOGO = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAn+SURBVHgB7Z1bbBRlGMdnaW+7pUtbSqktpSBBxAhe4AWJJkQhphoVa9SkBi8m9ELDFROv8MAJTwS8RRNifCEIJkQFA3JDQKKoREViiMFygUBLi71st7Pb7u6u+89ntmt3p53Nfjuz3fbfO7/pSXdm9pvnfN93nnNmQh5jjDHGGGOMMcYYY4wxxhhjjDHGGGOMMcYYY4wxxhiTe0IoHvTj4u8syvIPkP4YhKK0A9JXkK5A+plG30I5D24Bz+E5PD8ExV8hXaEJo1Q4oDAEQehCjIywLxhE/SthHxGYSCD8QER2oagXgqEWysK9lw2FbzUjBTVT9HMA0g1BoD9dYIgHc3gv6oHQqA9TG8A9h9SA7iSkmxKUAALvwW9C68/HMhNxiDsZ4T/iPXBdZoyDu1QCoJWRzHqECxynIxr/VonIijjE2YIQJAZCah++Lg5AwKkXALl+E9JAAQ1gOAQdX4oCnBcQ5QjPTEE+BN0CiLIAhNQrANL9i5DmCphwmAeh8b8Q1gIkI+bZCL3hoOIF6NMCENKkADA7vucdUb8JotibcAeoqYDEBek7CA3PKCGU9NfNQBgWuGz3vQVAHjX1KRRvVjCBMAOi7CAzAIjmPYSKSwoMgJDjFiLBQDQzBw0r5rT7yRsjClCwCiQdIYj2HUjDOaj5exKqGyy5tFECIukvQeM7FfjDr62qhhUlc2C2uQrcLme+P5YxBgSoC6sHjm0/gpI7V/P9+UzWn0m1sP2REqivrYabV6/oAji2/2VQmiqg9Yl7oLamSj+LJVEHrT/pg6du1dk/IaXSOx8cZIL+Afg5hBcGDuLv4bXXHZ+BC7nZsu7INa0ANbNzTP9A/8cF9d/P1YCJdGNWBMiWfr8fpj99CebO7dLPglgsL78YwvsPfA+3lVXJlltU5LeWp+0LwBzrS9p54z7k0kF59Kj1KTrBmWntFbGgRgIg6PGlFvbv4hggNR3wKt9PVQJAAe8Dz82F9/Zs1t9vyPIMrjtnGqHd2rVMqJkIXwA2dD5otRpnKKfI9XkUIAMqKxwwPuyEJzZupK9N9tuL+WXWpMqNogKaWPPDNe3f/4ObzfR5swWKiwolxE6kJ1Uca70u+Jifm72PF/FT0Bo4AQ2rQjAnvLl7E8M+1Ih8MdzC0N8P7ZffJMDB6+9diBZbMZ3CKPwDlS8H4fP1i6Cys5++ZmnpUfnj82uHX9sNfeIOcLsqFXXI94xMAGxUsv2IxUTfa16ZBe61K8CZ+XomUF48B0aEfqj/fa+xDmLpAFHAQEAvCKF6+JhA60f6O6mCqz67rx6Wr2iAuC3AyALChuj5rIfMPKwkGFvsajMVYOxsZRE5Ii6x4As8DgHRUq2A/zT7bTfAtm+/gT4DEGyffXAUEqDghLAU4HL4CSGI84LDN3H8dDDOjQbAd8sFEMxJ7rdwKKYhAQg+Zz8k3Jmy0QqyqDWMElISkKXjBRCJRKBtrU1AfNQz9hagPysc5wMiHDSVAiZ0XWipCXJXA4p3iQWjBQh7BENAIxG7AZI/WboKwp6P+2REiU8W1NkzGghhgJAWENfCKUGTScfosUko0iQCQnFBgnzJhK1/wug2BFFnVh/4s9tVAVgGARUCy9i1dgMAoAwCEgk8o1M/Pg/o5ID0MSLdL5c1UAAhAAx5Zw3s9Qq7Bsi+HiwLgMrqBQglUQAa18T5oBhxdyWjB2DWBQjmmvzt+xCOxqUXUGquhdnVNVDpZPV3ixUvQOwNEAAByYROGA3w7vS2ngbXujuj+xOIi4b6b0FEyEogO2qgvOgoCwJ4vKXw8+rF1n5zqmwUMCP3xUC3hQeH+sDpLGbDIG+EOx4GnvQUJgcKQA3TEAhMPB95mASszP8cBExfEjRlTe35PzRZ/3hD6/HFqL3k+nkKOkrhDwQQK8Dwez+AYPrUFiFhhj7UTQs/2RIGerU5n5pBR9hXeDE4V9kOpy6ZA8DpY7CkZbP1jxW7mE/+8lO4+eG1uh/ljXJxAjQ//3n8Xx9DSLxmTZT/KW/pGoCunTbls9x2XQ5b/MEbR8HfVmH9Y1UdFS/8Gc7Yl4eUznrDhNfYPs5MALM48Ngb4R/RdfJ+4L94C2TydbLA5OZ1n1iQ83fn5nO0aSRABnQ/8jUIU/Hrt43O45tUJ/+x1Qshkbb+/PZ63v54wqsDvR7nAyaLggQMewRz1v+HMB/wNpWiFy2EfYKZZ7+0h6CJpI0Dod5rjfSfPQKJlBc6zr2Q2wMReAAtS2qgZVlp+sdfb/8bdh45BU1zK2BTy8qcNjKRgWjI75XqRrMnsLF3e3pX0JONUvrN2d9u4jE0PsEADIRgxP2K7jSZhq4TB2AkoQtRjAQThGMnQYgmZI3BSEgC8CQICFQwhLb/GgBxW3AM0BhyzX/bACYDXhyDpBbCJAKSKAwQjh8BYfPNRf4I5ByDj4CwQHcH9QmImQtSWoQA+Lq9NfldwzRGuyCcOQtCbj5I6S0BgO/I0QvmFnA2dMMFYiGzO4ECEBACXkDpI2Bz95c36nr/cA/INcBJg9HSAyBIA0WCjTGoISACZQAGmEJSJCG8c6sYIerN1HSaPcMeGS4vVj98H7h9pZm6c7TfJ8oRj4C4mB0HjBwB5kUA7C/m/lYL1TtOkwBL7rACgARB+9PhqJHoPDCjAwKgCwRTsOjmkmwF6FzZAidc3dDc7Ib5c+dIDhoWzy8FYW+eB1c+Uwq3N1dn3YvN7dXwQ+8duLr2Jp5zxzw4cOcKEPk+2PjQvdq1TnjwhunwWkOJ/Dy4vGoaVIYD0H3smgy4qbMUFpUUwfbxcfD78FqTf7AVzGcWUJ4LVY3Y3gC/VIE/1hW2W/U4k2MIJ4CfnysJwWQUAzYI0FYsAcD9T06U27pOiwchD71x9t7BggQkyiV07X/fLBLDmEYBOHSKc48j23yYG8NkInnixQBA8Lrbx8rEADeIAgw6iLTPumrAy88JtxbKlBMwT1hBI1EO8PYw1+IQgIDb5SMQ7vG2cRKMGS/+KLEQQBAm74twIQQhT4EwAVLm/iSHFfIu+WX6/WOTRl0AI2jhwT0IZOBAQVCaw2RouegT0hF5Y8IQwEmknW88ftUCQj4IJaTrY0bEF4GBis2pLFQIcp0k0I++frRSAfhzH8lRl/1ITQjQhI/bCw0NEuRGUKSLFOtPpDf4QSUhCAeEIfRfHn7xUwUAdB+UIg2lSHDHmQ5AiOeRsEoDToTQb99hx+Q4UzogWGA9hHh+RC8jCQ8jpOwa/Dz//tnKIt0/U0BoPxHpnv7rvP/yi2kksv5MJWU9YxmUxyW18hg5Bv8PgRBDk4E4o1G63wu5nUKoESW1BYQyEUCYIE3Y8M8xLACgfA7CqD2Y6hKkAQi9CTQ/EzH3w/2PJQmQx9EeCNc1gsmDMbSOZP8DF/LyUMb3C2oAAAAASUVORK5CYII=";
 
         const DEFAULT_CFG = {
             name: "Ayoub",
@@ -517,4 +517,1297 @@
                                     <span style={{ color: 'white', fontWeight: 700, fontSize: 10 }}>!</span>
                                 </div>
                                 <p style={{ fontSize: 13, color: '#1a1a1a', lineHeight: 1.45, flex: 1 }}>Les données de votre carte sont disponibles dans l'app. Vous pouvez l'utiliser dès maintenant pour payer e...</p>
-                                <svg width="14" height="14" viewBox="
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="2"><path d="M9 18l6-6-6-6" /></svg>
+                            </div>
+                            <div className="flex gap-3 px-3 mt-4 overflow-x-auto pb-1">
+                                {actions.map((b, i) => (
+                                    <button key={i} onClick={b.onClick} className="press flex flex-col items-center gap-1.5 flex-shrink-0" style={{ minWidth: 72 }}>
+                                        <div className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm" style={{ background: b.bg, border: b.border ? '1px solid #eee' : 'none' }}>
+                                            {b.imgSrc
+                                                ? <img src={b.imgSrc} width="30" height="30" style={{ objectFit: 'contain' }} alt={b.label} />
+                                                : b.icon}
+                                        </div>
+                                        <span style={{ fontSize: 11, fontWeight: 500, color: '#1a1a1a' }}>{b.label}</span>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="px-3 mt-5">
+                            <div className="flex justify-between items-center mb-3">
+                                <h2 style={{ fontSize: 17, fontWeight: 700, color: '#1a1a1a' }}>Favoris</h2>
+                                <button style={{ fontSize: 14, color: '#00965E' }}>Tout montrer</button>
+                            </div>
+                            <div className="grid grid-cols-2 gap-2.5">
+                                {accounts.map(acc => (
+                                    <button key={acc.id} onClick={() => onAccountClick(acc)} className="press bg-white rounded-2xl p-4 text-left shadow-sm border border-gray-100 flex flex-col">
+                                        <p style={{ fontSize: 12, fontWeight: 600, color: '#1a1a1a' }} className="truncate">{acc.label}</p>
+                                        <div className="flex items-center gap-1.5 mt-0.5">
+                                            {acc.type === 'À vue' && <span style={{ background: '#00965E', color: 'white', fontSize: 8, fontWeight: 700, padding: '2px 5px', borderRadius: 4 }}>H!</span>}
+                                            <p style={{ fontSize: 11, color: '#888' }}>{acc.type} ···· {acc.suffix}</p>
+                                        </div>
+                                        <p style={{ fontSize: 20, fontWeight: 700, color: '#1a1a1a', marginTop: 12, lineHeight: 1 }}>
+                                            {fmt(acc.balance)} <span style={{ fontSize: 12, fontWeight: 400, color: '#aaa' }}>{acc.currency}</span>
+                                        </p>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                        {[
+                            {
+                                l: 'Investissements', icon: (
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00965E" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M3 17l4 -4l4 4l4 -6l4 3" /><path d="M14 7l2 0" /><path d="M20 7l0 2" />
+                                    </svg>
+                                )
+                            },
+                            {
+                                l: 'Analyse de budget', icon: (
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00965E" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                                        <path d="M12 7v5l3 3" />
+                                    </svg>
+                                )
+                            },
+                        ].map(r => (
+                            <div key={r.l} className="mx-3 mt-2">
+                                <button className="press w-full bg-white rounded-2xl px-4 py-4 flex items-center gap-3 shadow-sm border border-gray-100">
+                                    {r.icon}
+                                    <span style={{ fontSize: 15, color: '#1a1a1a', flex: 1, textAlign: 'left' }}>{r.l}</span>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="2"><path d="M9 18l6-6-6-6" /></svg>
+                                </button>
+                            </div>
+                        ))}
+                        {recent.length > 0 && (
+                            <div className="px-3 mt-4 mb-3">
+                                <h2 style={{ fontSize: 15, fontWeight: 700, color: '#1a1a1a', marginBottom: 8 }}>Derniers virements</h2>
+                                <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+                                    {recent.map((t, i) => {
+                                        const { day, mon } = fmtDayMon(t.date);
+                                        return (
+                                            <div key={t.id || i} className={`flex items-center px-4 py-3 gap-3 ${i < recent.length - 1 ? 'border-b border-gray-100' : ''}`}>
+                                                <div style={{ textAlign: 'center', width: 32, flexShrink: 0 }}>
+                                                    <div style={{ fontSize: 15, fontWeight: 700, color: '#1a1a1a', lineHeight: 1 }}>{day}</div>
+                                                    <div style={{ fontSize: 10, color: '#aaa' }}>{mon}</div>
+                                                </div>
+                                                <div style={{ flex: 1, minWidth: 0 }}>
+                                                    <p style={{ fontSize: 13, fontWeight: 600, color: '#1a1a1a', textTransform: 'uppercase' }} className="truncate">{t.to_name}</p>
+                                                    <p style={{ fontSize: 11, color: '#aaa' }}>{t.type}</p>
+                                                </div>
+                                                <span style={{ fontSize: 13, fontWeight: 600, color: t.amount > 0 ? '#2DB34A' : '#1a1a1a' }}>
+                                                    {t.amount > 0 ? '+' : ''}{fmt(t.amount)} EUR
+                                                </span>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                    <BottomNav active="accueil" />
+                </div>
+            );
+        }
+
+        function TransactionsPage({ account, transfers, balances, onBack, onTransfer, onTxClick }) {
+            const [tab, setTab] = useState('executed');
+            const acc = { ...account, balance: balances[account.id] ?? account.balance };
+            const myTransfers = transfers.filter(t => t.from_iban === acc.iban);
+            return (
+                <div className="fixed inset-0 flex flex-col screen-r" style={{ background: '#F2F2F7' }}>
+                    <div style={{ background: 'white', borderBottom: '1px solid #e5e5ea', paddingTop: 'max(44px,env(safe-area-inset-top,44px))' }}>
+                        <div className="flex items-center px-4 pb-3 relative">
+                            <button onClick={onBack} className="press absolute left-4 flex items-center gap-1" style={{ color: '#00965E', fontSize: 15 }}>
+                                <svg width="9" height="15" viewBox="0 0 9 16" fill="none"><path d="M8 1L1 8l7 7" stroke="#00965E" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                                Retour
+                            </button>
+                            <h1 style={{ fontSize: 17, fontWeight: 700, color: '#1a1a1a', flex: 1, textAlign: 'center' }}>Transactions</h1>
+                            <div className="absolute right-4 flex gap-3.5">
+                                <button className="press"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="1.8"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg></button>
+                                <button className="press"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" /></svg></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex-1 scroll-ios pb-4">
+                        <div className="mx-3 mt-3 bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
+                            <p style={{ fontSize: 13, fontWeight: 600, color: '#1a1a1a', textAlign: 'center' }}>{acc.label}</p>
+                            <p style={{ fontSize: 12, color: '#aaa', textAlign: 'center', marginTop: 2 }}>{acc.iban}</p>
+                            <p style={{ fontSize: 28, fontWeight: 700, color: '#1a1a1a', textAlign: 'center', marginTop: 8, lineHeight: 1 }}>
+                                {fmt(acc.balance)} <span style={{ fontSize: 14, fontWeight: 400, color: '#aaa' }}>{acc.currency}</span>
+                            </p>
+                            <div className="flex justify-center mt-3">
+                                <button onClick={onTransfer} className="press rounded-full px-5 py-2.5 flex items-center gap-2" style={{ background: '#f2f2f7' }}>
+                                    <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ background: '#2DB34A' }}>
+                                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5"><path d="M12 19V5M5 12l7-7 7 7" /></svg>
+                                    </div>
+                                    <span style={{ fontSize: 13, fontWeight: 500, color: '#1a1a1a' }}>Faire un virement</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div className="mx-3 mt-3 flex rounded-xl p-1" style={{ background: '#e5e5ea' }}>
+                            {['executed', 'planned'].map(t => (
+                                <button key={t} onClick={() => setTab(t)} className={`press flex-1 py-2 rounded-lg text-[13px] font-medium transition-all ${tab === t ? 'bg-white text-[#1a1a1a] shadow-sm' : 'text-gray-500'}`}>
+                                    {t === 'executed' ? 'Exécuté' : 'Planifié'}
+                                </button>
+                            ))}
+                        </div>
+                        <div className="mx-3 mt-3 bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+                            {tab === 'executed' && myTransfers.length > 0 ? myTransfers.map((t, i) => {
+                                const { day, mon } = fmtDayMon(t.date);
+                                return (
+                                    <button key={t.id || i} onClick={() => onTxClick(t)} className="press w-full flex items-center px-4 py-3.5 gap-3 border-b border-gray-100 last:border-0">
+                                        <div style={{ textAlign: 'center', width: 36, flexShrink: 0 }}>
+                                            <div style={{ fontSize: 16, fontWeight: 700, color: '#1a1a1a', lineHeight: 1 }}>{day}</div>
+                                            <div style={{ fontSize: 10, color: '#aaa' }}>{mon}</div>
+                                        </div>
+                                        <div style={{ flex: 1, minWidth: 0, textAlign: 'left' }}>
+                                            <p style={{ fontSize: 13, fontWeight: 600, color: '#1a1a1a', textTransform: 'uppercase' }} className="truncate">{t.to_name}</p>
+                                            <p style={{ fontSize: 11, color: '#aaa', marginTop: 2 }}>{t.type}</p>
+                                        </div>
+                                        <span style={{ fontSize: 13, fontWeight: 600, color: t.amount > 0 ? '#2DB34A' : '#1a1a1a', flexShrink: 0 }}>
+                                            {t.amount > 0 ? '+' : ''}{fmt(t.amount)} EUR
+                                        </span>
+                                        <svg width="8" height="13" viewBox="0 0 9 16" fill="none" style={{ opacity: .3, flexShrink: 0 }}><path d="M1 1l7 7-7 7" stroke="#1a1a1a" strokeWidth="2.2" strokeLinecap="round" /></svg>
+                                    </button>
+                                );
+                            }) : (
+                                <div style={{ padding: '48px 0', textAlign: 'center' }}>
+                                    <p style={{ fontSize: 14, color: '#aaa' }}>{tab === 'executed' ? 'Aucune transaction' : 'Aucun virement planifié'}</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    <BottomNav active="accueil" />
+                </div>
+            );
+        }
+
+
+        function fmtDateDoc(dateStr) {
+            if (!dateStr) return '';
+            const [y, m, d] = dateStr.split('-');
+            return d + '/' + m + '/' + y;
+        }
+        function fmtDateHeader(dateStr) {
+            if (!dateStr) return '';
+            const [y, m, d] = dateStr.split('-');
+            return d + '.' + m + '.' + y;
+        }
+        function fmtAmountDoc(amount) {
+            if (amount === undefined || amount === null) return '';
+            const n = Math.abs(parseFloat(amount)).toFixed(2).replace('.', ',');
+            return (parseFloat(amount) < 0 ? '-' : '+') + n + ' EUR';
+        }
+        function genRef(id) {
+            const h = Math.abs(id).toString(16).toUpperCase().padStart(8, '0');
+            const r = (id * 2654435761 >>> 0).toString(16).toUpperCase().padStart(8, '0');
+            return (h + r + h.split('').reverse().join('') + r.split('').reverse().join('')).substring(0, 32);
+        }
+        function genBankRef(id) {
+            return Math.abs(id).toString().padStart(16, '0');
+        }
+
+        function downloadTxPdf(tx) {
+            if (!window.jspdf) return;
+            const { jsPDF } = window.jspdf;
+
+            // ── Format A4 portrait, marges calées sur l'image ──
+            const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
+            const PW = 210, PH = 297;
+            const ML = 14, MR = 14;           // marges gauche/droite page
+            const CML = 18, CMR = 18;          // marges intérieures carte
+            const CW = PW - ML - MR;            // largeur carte
+
+            // Fond page gris très clair (comme l'app)
+            doc.setFillColor(242,242,247);
+            doc.rect(0,0,PW,PH,'F');
+
+            // ── Helpers ──
+            const fmtDot  = s => { if(!s) return ''; const [y,m,d]=s.split('-'); return d+'.'+m+'.'+y; };
+            const fmtSlash= s => { if(!s) return ''; const [y,m,d]=s.split('-'); return d+'/'+m+'/'+y; };
+            const fmtAmt  = n => {
+                if(n===undefined||n===null) return '';
+                const abs = Math.abs(parseFloat(n)).toFixed(2).replace('.',',');
+                return (parseFloat(n)<0?'-':'+')+abs+' EUR';
+            };
+            const genRef     = id => { const h=Math.abs(id).toString(16).toUpperCase().padStart(8,'0'); const r=(id*2654435761>>>0).toString(16).toUpperCase().padStart(8,'0'); return (h+r+h.split('').reverse().join('')+r.split('').reverse().join('')).substring(0,32); };
+            const genBankRef = id => Math.abs(id).toString().padStart(16,'0');
+
+            const txId       = tx.id || Date.now();
+            const docDate    = tx.created_at ? fmtDot(tx.created_at.substring(0,10)) : fmtDot(tx.date);
+            const execSlash  = fmtSlash(tx.date);
+            const ref        = genRef(txId);
+            const bankRef    = genBankRef(txId);
+            const toNameUp   = (tx.to_name||'').toUpperCase();
+            const toIban     = (tx.to_iban||'').toUpperCase().replace('—','').trim();
+            const bicRaw     = (tx.bic||'').trim().toUpperCase().replace(/\s+/g,'');
+            const bicFmt     = bicRaw.length===11 ? bicRaw.slice(0,8)+' '+bicRaw.slice(8) : bicRaw;
+            const bicLine    = bicFmt ? 'BIC '+bicFmt+' VIA MOBILE BANKING' : 'VIA MOBILE BANKING';
+            const typeUp     = (tx.type||'VIREMENT INSTANTANE EN EUROS').toUpperCase()
+                                 .replace(/É/g,'E').replace(/À/g,'A').replace(/Â/g,'A').replace(/Ê/g,'E').replace(/È/g,'E').replace(/Î/g,'I');
+            const seqStr     = tx.seq ? String(tx.seq) : (new Date().getFullYear()+'-'+String(txId).slice(-2));
+            const commUp     = tx.comm ? tx.comm.toUpperCase() : 'PAS DE COMMUNICATION';
+
+            let y = 12;
+
+            // ════════════════════════════════════════════
+            // ZONE HEADER  (fond gris, hors carte)
+            // "Terminé"  à gauche  +  icône partage à droite
+            // ════════════════════════════════════════════
+            doc.setFont('helvetica','normal');
+            doc.setFontSize(20);
+            doc.setTextColor(32,160,96);
+            doc.text('Terminé', ML+2, y+6);
+
+            // Icône ↑ dans carré arrondi (coin haut droit)
+            const bx = PW-MR-10, by = y;
+            doc.setDrawColor(60,60,60); doc.setLineWidth(0.55);
+            doc.roundedRect(bx, by, 10, 10, 1.8, 1.8);
+            // trait vertical
+            doc.line(bx+5, by+6.8, bx+5, by+3.5);
+            // flèche
+            doc.line(bx+3.2, by+5.2, bx+5, by+3.2);
+            doc.line(bx+6.8, by+5.2, bx+5, by+3.2);
+
+            y += 15;
+
+            // ════════════════════════════════════════════
+            // CARTE BLANCHE  (fond blanc, bordure légère)
+            // ════════════════════════════════════════════
+            const cardX  = ML;
+            const cardY  = y;
+            // on peint d'abord le fond blanc
+            doc.setFillColor(255,255,255);
+            // la hauteur sera calculée après — on dessine le rect à la fin
+
+            y += 8;   // padding top intérieur carte
+
+            // ── Logo BNP Paribas (côté gauche) + Date (côté droit) ──
+            const logoX = cardX + CML - 14;
+            const logoH = 14, logoW = 14;
+            doc.addImage(HELLO_BANK_LOGO, 'PNG', logoX, y, logoW, logoH);
+
+            doc.setFont('helvetica','normal');
+            doc.setFontSize(10);
+            doc.setTextColor(30,30,30);
+            doc.text(docDate, PW-MR-CMR+14-2, y+8, { align:'right' });
+
+            y += logoH + 8;
+
+            // ── Titre "Détails de la transaction" + ligne séparatrice ──
+            doc.setFont('helvetica','bold');
+            doc.setFontSize(10.5);
+            doc.setTextColor(20,20,20);
+            doc.text('Détails de la transaction', cardX+CML-14+2, y);
+            y += 3;
+            doc.setDrawColor(30,30,30); doc.setLineWidth(0.55);
+            doc.line(cardX+CML-14+2, y, PW-MR-CMR+14-2, y);
+            y += 5;
+
+            // ── Lignes du tableau ──
+            doc.setFont('helvetica','normal');
+            const col1 = cardX + CML - 14 + 2;   // col label
+            const col2 = col1 + 44;               // col valeur (calé sur l'image)
+            const rowH = 7;
+            const FS   = 9.2;
+
+            const drawRow = (label, value) => {
+                doc.setFontSize(FS);
+                doc.setTextColor(30,30,30);
+                doc.text(label, col1, y);
+                doc.text(String(value), col2, y);
+                y += rowH;
+            };
+
+            drawRow('Type de transaction', tx.type||'Virement instantané en euros');
+            drawRow('De', tx.from_iban||'—');
+            drawRow('Montant', fmtAmt(tx.amount));
+            drawRow("Date d'exécution", execSlash);
+            drawRow('Date de comptabilisation', execSlash);
+
+            // ── Détails (multiligne) ──
+            const detailLines = [
+                typeUp,
+                toNameUp,
+                ...(toIban && toIban!=='—' ? [toIban] : []),
+                bicLine,
+                'VOTRE REFERENCE :',
+                ref,
+                commUp,
+                'REFERENCE BANQUE : '+bankRef,
+                'DATE VALEUR : '+execSlash,
+            ];
+            const lineH = 5.1;
+            doc.setFontSize(FS);
+            doc.setTextColor(30,30,30);
+            doc.text('Détails', col1, y);
+            detailLines.forEach((line, i) => {
+                doc.text(line, col2, y + i*lineH);
+            });
+            y += detailLines.length * lineH + 4;
+
+            // ── Nº de séquence ──
+            drawRow('N\u00ba de s\u00e9quence', seqStr);
+
+            y += 6; // padding bas intérieur carte
+
+            // ── Dessiner la carte (fond + contour) ──
+            const cardH = y - cardY;
+            doc.setFillColor(255,255,255);
+            doc.roundedRect(cardX, cardY, CW, cardH, 2.5, 2.5, 'F');
+            doc.setDrawColor(210,210,215); doc.setLineWidth(0.35);
+            doc.roundedRect(cardX, cardY, CW, cardH, 2.5, 2.5, 'S');
+
+            // Repasser tous les textes intérieurs PAR-DESSUS la carte blanche
+            // (jsPDF peint dans l'ordre — on re-dessine logo + textes)
+            doc.addImage(HELLO_BANK_LOGO, 'PNG', logoX, cardY+8, logoW, logoH);
+            doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.setTextColor(30,30,30);
+            doc.text(docDate, PW-MR-CMR+14-2, cardY+8+8, { align:'right' });
+
+            let ry = cardY + 8 + logoH + 8;
+            doc.setFont('helvetica','bold'); doc.setFontSize(10.5); doc.setTextColor(20,20,20);
+            doc.text('Détails de la transaction', col1, ry);
+            ry += 3;
+            doc.setDrawColor(30,30,30); doc.setLineWidth(0.55);
+            doc.line(col1, ry, PW-MR-CMR+14-2, ry);
+            ry += 5;
+
+            doc.setFont('helvetica','normal');
+            const rDrawRow = (label, value) => {
+                doc.setFontSize(FS); doc.setTextColor(30,30,30);
+                doc.text(label, col1, ry);
+                doc.text(String(value), col2, ry);
+                ry += rowH;
+            };
+            rDrawRow('Type de transaction', tx.type||'Virement instantané en euros');
+            rDrawRow('De', tx.from_iban||'—');
+            rDrawRow('Montant', fmtAmt(tx.amount));
+            rDrawRow("Date d'ex\u00e9cution", execSlash);
+            rDrawRow('Date de comptabilisation', execSlash);
+
+            doc.setFontSize(FS); doc.setTextColor(30,30,30);
+            doc.text('D\u00e9tails', col1, ry);
+            detailLines.forEach((line, i) => { doc.text(line, col2, ry + i*lineH); });
+            ry += detailLines.length * lineH + 4;
+            rDrawRow('N\u00ba de s\u00e9quence', seqStr);
+
+            // ── Disclaimer (sous la carte, fond gris) ──
+            const dy = cardY + cardH + 6;
+            doc.setFontSize(7.2);
+            doc.setFont('helvetica','italic');
+            doc.setTextColor(130,130,130);
+            doc.text('Disclaimer: Ceci ne constitue ni un extrait de compte ni une preuve de paiement.', cardX+2, dy);
+            doc.setFont('helvetica','normal');
+            doc.text('1', PW-MR-2, dy, { align:'right' });
+
+            // ── Téléchargement ──
+            doc.save('transaction_'+String(txId)+'.pdf');
+        }
+
+        function PdfDetailOverlay({ tx, onClose }) {
+            const docDate = tx.created_at ? fmtDateHeader(tx.created_at.substring(0, 10)) : fmtDateHeader(tx.date);
+            const execDate = fmtDateDoc(tx.date);
+            const ref = genRef(tx.id || Date.now());
+            const bankRef = genBankRef(tx.id || Date.now());
+            const toNameUpper = (tx.to_name || '').toUpperCase();
+            const toIban = (tx.to_iban || '').toUpperCase().replace('—','').trim();
+            const bicRaw = (tx.bic || '').trim().toUpperCase().replace(/\s+/g, '');
+            const bicFmt = bicRaw.length === 11 ? bicRaw.slice(0, 8) + ' ' + bicRaw.slice(8) : bicRaw;
+            const bicLine = bicFmt ? 'BIC ' + bicFmt + ' VIA MOBILE BANKING' : 'VIA MOBILE BANKING';
+            const typeUp = (tx.type || 'VIREMENT INSTANTANE EN EUROS').toUpperCase()
+                .replace(/É/g,'E').replace(/À/g,'A').replace(/Â/g,'A').replace(/Ê/g,'E').replace(/È/g,'E');
+            const seqStr = tx.seq ? String(tx.seq) : (new Date().getFullYear()+'-'+String(tx.id||'00').toString().slice(-2));
+            const commUp = tx.comm ? tx.comm.toUpperCase() : 'PAS DE COMMUNICATION';
+
+            const detailLines = [
+                typeUp,
+                toNameUpper,
+                ...(toIban && toIban !== '—' && toIban !== '' ? [toIban] : []),
+                bicLine,
+                'VOTRE REFERENCE :',
+                ref,
+                commUp,
+                'REFERENCE BANQUE : ' + bankRef,
+                'DATE VALEUR : ' + execDate,
+            ];
+
+            return (
+                <div className="fixed inset-0 z-[200] flex flex-col" style={{ background: '#f2f2f7' }}>
+                    {/* ── Header : Terminé + icône partage ── */}
+                    <div style={{ background: '#f2f2f7', padding: 'max(env(safe-area-inset-top,16px),16px) 16px 0', flexShrink: 0 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 44 }}>
+                            <button onClick={onClose} className="press" style={{ color: '#00965E', fontSize: 17, fontWeight: 600, background: 'none', border: 'none', cursor: 'pointer' }}>
+                                Terminé
+                            </button>
+                            <button className="press" onClick={() => downloadTxPdf(tx)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#1a1a1a' }}>
+                                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/>
+                                    <polyline points="16 6 12 2 8 6"/>
+                                    <line x1="12" y1="2" x2="12" y2="15"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* ── Contenu scrollable ── */}
+                    <div className="flex-1 scroll-ios" style={{ padding: '14px 12px max(env(safe-area-inset-bottom,20px),20px)' }}>
+
+                        {/* ── CARTE BLANCHE style ── */}
+                        <div style={{ background: 'white', borderRadius: 8, maxWidth: 560, margin: '0 auto', overflow: 'hidden', boxShadow: '0 2px 16px rgba(0,0,0,.10)', border: '1px solid #e0e0e5' }}>
+
+                            {/* Logo BNP Paribas + date */}
+                            <div style={{ padding: '20px 20px 14px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                                <img src={HELLO_BANK_LOGO} alt="BNP Paribas" style={{ height: 44, width: 44, objectFit: 'contain', borderRadius: 6 }} />
+                                <div style={{ fontSize: 12.5, color: '#1a1a1a', fontWeight: 400, paddingTop: 6 }}>{docDate}</div>
+                            </div>
+
+                            {/* Titre + ligne */}
+                            <div style={{ padding: '0 20px 10px' }}>
+                                <div style={{ fontSize: 12.5, fontWeight: 700, color: '#1a1a1a', marginBottom: 7 }}>Détails de la transaction</div>
+                                <div style={{ height: 1, background: '#1a1a1a' }} />
+                            </div>
+
+                            {/* Tableau lignes */}
+                            <div style={{ padding: '2px 20px 0' }}>
+                                {[
+                                    ["Type de transaction", tx.type || "Virement instantané en euros"],
+                                    ["De", tx.from_iban || "—"],
+                                    ["Montant", fmtAmountDoc(tx.amount)],
+                                    ["Date d'exécution", execDate],
+                                    ["Date de comptabilisation", execDate],
+                                ].map(([k, v]) => (
+                                    <div key={k} style={{ display: 'flex', padding: '8px 0', borderBottom: '1px solid #f0f0f0' }}>
+                                        <div style={{ width: '42%', fontSize: 11.5, color: '#1a1a1a', flexShrink: 0 }}>{k}</div>
+                                        <div style={{ fontSize: 11.5, color: '#1a1a1a' }}>{v}</div>
+                                    </div>
+                                ))}
+
+                                {/* Détails multiligne */}
+                                <div style={{ display: 'flex', padding: '8px 0 6px' }}>
+                                    <div style={{ width: '42%', fontSize: 11.5, color: '#1a1a1a', flexShrink: 0 }}>Détails</div>
+                                    <div style={{ fontSize: 11.5, color: '#1a1a1a', lineHeight: 1.7 }}>
+                                        {detailLines.map((line, i) => (
+                                            <div key={i} style={{ wordBreak: 'break-all' }}>{line}</div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Nº de séquence */}
+                                <div style={{ display: 'flex', padding: '8px 0 18px', borderTop: '1px solid #f0f0f0' }}>
+                                    <div style={{ width: '42%', fontSize: 11.5, color: '#1a1a1a', flexShrink: 0 }}>Nº de séquence</div>
+                                    <div style={{ fontSize: 11.5, color: '#1a1a1a' }}>{seqStr}</div>
+                                </div>
+                            </div>
+
+                            {/* Disclaimer */}
+                            <div style={{ borderTop: '1px solid #e0e0e5', padding: '8px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <div style={{ fontSize: 9.5, color: '#888', fontStyle: 'italic', flex: 1, paddingRight: 8 }}>
+                                    Disclaimer: Ceci ne constitue ni un extrait de compte ni une preuve de paiement.
+                                </div>
+                                <div style={{ fontSize: 9.5, color: '#888', flexShrink: 0 }}>1</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function TransactionDetail({ tx, onBack }) {
+            const [showPdf, setShowPdf] = useState(false);
+            const dateStr = fmtLong(tx.date);
+            const rows = [
+                ['Type', tx.type],
+                ...(tx.card ? [['Carte', tx.card]] : []),
+                ...(tx.bic ? [['BIC bénéficiaire', tx.bic]] : []),
+                ['Date valeur', dateStr],
+                ['N° de séquence', String(tx.seq ?? '—')],
+            ];
+            return (
+                <div className="fixed inset-0 flex flex-col screen-r" style={{ background: '#F2F2F7' }}>
+                    <div style={{ background: 'white', borderBottom: '1px solid #e5e5ea', paddingTop: 'max(44px,env(safe-area-inset-top,44px))' }}>
+                        <div className="flex items-center px-4 pb-3 relative">
+                            <button onClick={onBack} className="press absolute left-4 flex items-center gap-1" style={{ color: '#00965E', fontSize: 15 }}>
+                                <svg width="9" height="15" viewBox="0 0 9 16" fill="none"><path d="M8 1L1 8l7 7" stroke="#00965E" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                                Retour
+                            </button>
+                            <h1 style={{ fontSize: 17, fontWeight: 700, color: '#1a1a1a', flex: 1, textAlign: 'center' }}>Détails de la transaction</h1>
+                            <button className="press absolute right-4" onClick={() => setShowPdf(true)}>
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00965E" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                                    <polyline points="14 2 14 8 20 8" />
+                                    <line x1="8" y1="13" x2="16" y2="13" />
+                                    <line x1="8" y1="17" x2="12" y2="17" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div className="flex-1 scroll-ios pb-4">
+                        <div className="mx-3 mt-3 bg-white rounded-2xl p-5 shadow-sm border border-gray-100 text-center">
+                            <p style={{ fontSize: 34, fontWeight: 700, color: '#1a1a1a', lineHeight: 1.1 }}>
+                                {fmtSigned(tx.amount)} <span style={{ fontSize: 18, fontWeight: 600 }}>EUR</span>
+                            </p>
+                            <p style={{ fontSize: 15, fontWeight: 600, color: '#1a1a1a', marginTop: 6, textTransform: 'uppercase' }}>{tx.to_name}</p>
+                            <p style={{ fontSize: 13, color: '#aaa', marginTop: 4 }}>{dateStr}</p>
+                        </div>
+                        <div className="mx-3 mt-3 bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+                            {rows.map(([k, v], i) => (
+                                <div key={k} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 16px', borderBottom: i < rows.length - 1 ? '1px solid #f0f0f5' : 'none' }}>
+                                    <span style={{ fontSize: 14, color: '#1a1a1a' }}>{k}</span>
+                                    <span style={{ fontSize: 14, color: '#666', textAlign: 'right', maxWidth: '58%' }}>{v}</span>
+                                </div>
+                            ))}
+                            <button className="press w-full flex justify-between items-center px-4 py-4" style={{ borderTop: '1px solid #f0f0f5' }} onClick={() => setShowPdf(true)}>
+                                <span style={{ fontSize: 14, fontWeight: 600, color: '#1a1a1a' }}>Plus d'informations</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="2"><path d="M9 18l6-6-6-6" /></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <BottomNav active="accueil" />
+                    {showPdf && <PdfDetailOverlay tx={tx} onClose={() => setShowPdf(false)} />}
+                </div>
+            );
+        }
+
+        function SuccessOverlay({ amount, toName, onClose }) {
+            useEffect(() => { const t = setTimeout(onClose, 3200); return () => clearTimeout(t); }, []);
+            return (
+                <div className="fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center modal-up">
+                    <div style={{ animation: 'ringIn .5s ease' }}>
+                        <div style={{ width: 100, height: 100, borderRadius: '50%', background: '#E8F5E9', display: 'flex', alignItems: 'center', justifyContent: 'center', animation: 'popIn .5s .15s ease both', opacity: 0 }}>
+                            <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+                                <circle cx="26" cy="26" r="25" stroke="#2DB34A" strokeWidth="2.5" />
+                                <path d="M14 26l9 9 16-18" stroke="#2DB34A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="40" strokeDashoffset="40" style={{ animation: 'checkDraw .4s .5s ease forwards' }} />
+                            </svg>
+                        </div>
+                    </div>
+                    <p style={{ fontSize: 22, fontWeight: 700, color: '#1a1a1a', marginTop: 24 }}>Virement envoyé !</p>
+                    <p style={{ fontSize: 32, fontWeight: 900, color: '#2DB34A', marginTop: 4 }}>{fmt(Math.abs(amount))} EUR</p>
+                    <p style={{ fontSize: 15, color: '#888', marginTop: 8 }}>vers <span style={{ fontWeight: 600, color: '#1a1a1a', textTransform: 'uppercase' }}>{toName}</span></p>
+                    <div style={{ marginTop: 40, width: 128, height: 4, background: '#f0f0f0', borderRadius: 2, overflow: 'hidden' }}>
+                        <div style={{ height: '100%', background: '#2DB34A', borderRadius: 2, animation: 'loadBar 3s linear forwards' }} />
+                    </div>
+                    <p style={{ fontSize: 12, color: '#bbb', marginTop: 12 }}>Fermeture automatique...</p>
+                </div>
+            );
+        }
+
+        function TransferField({ lbl, val, onChange, type = 'text' }) {
+            return (
+                <div style={{ background: 'white', borderRadius: 16, padding: '14px 16px', boxShadow: '0 1px 3px rgba(0,0,0,.06)', border: '1px solid #f0f0f5' }}>
+                    {val ? <label style={{ display: 'block', fontSize: 11, color: '#8e8e93', fontWeight: 500, marginBottom: 3 }}>{lbl}</label> : null}
+                    <input type={type} value={val} onChange={e => onChange(e.target.value)} placeholder={lbl}
+                        style={{ fontSize: 16, color: '#1a1a1a', caretColor: '#00965E', width: '100%', background: 'transparent', border: 'none', outline: 'none', padding: 0 }} />
+                </div>
+            );
+        }
+
+        const MONTHS_FR = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+
+        function DatePickerModal({ value, onChange, onClose }) {
+            const initial = value ? new Date(value + 'T12:00:00') : new Date();
+            const [year, setYear] = useState(initial.getFullYear());
+            const [month, setMonth] = useState(initial.getMonth());
+            const [day, setDay] = useState(initial.getDate());
+
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const firstDay = new Date(year, month, 1).getDay();
+            const adjustedFirst = firstDay === 0 ? 6 : firstDay - 1; // lundi=0
+            const today = new Date();
+
+            const confirm = () => {
+                const d = Math.min(day, daysInMonth);
+                const pad = n => String(n).padStart(2, '0');
+                onChange(`${year}-${pad(month + 1)}-${pad(d)}`);
+                onClose();
+            };
+
+            const cells = [];
+            for (let i = 0; i < adjustedFirst; i++) cells.push(null);
+            for (let i = 1; i <= daysInMonth; i++) cells.push(i);
+
+            return (
+                <div className="fixed inset-0 z-[60] flex flex-col">
+                    <div style={{ flex: 1, background: 'rgba(0,0,0,.4)' }} onClick={onClose} />
+                    <div style={{ background: 'white', borderRadius: '20px 20px 0 0', paddingBottom: 'max(24px,env(safe-area-inset-bottom,24px))' }} className="modal-up">
+                        <div style={{ display: 'flex', justifyContent: 'center', padding: '8px 0 0' }}>
+                            <div style={{ width: 38, height: 4, borderRadius: 2, background: '#d0d0d5' }} />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px 8px' }}>
+                            <button onClick={onClose} style={{ color: '#00965E', fontSize: 15 }} className="press">Annuler</button>
+                            <span style={{ fontSize: 16, fontWeight: 600, color: '#1a1a1a' }}>Date d'exécution</span>
+                            <button onClick={confirm} style={{ color: '#00965E', fontSize: 15, fontWeight: 600 }} className="press">OK</button>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '4px 16px 12px' }}>
+                            <button onClick={() => { if (month === 0) { setMonth(11); setYear(y => y - 1); } else setMonth(m => m - 1); }} className="press" style={{ color: '#00965E', padding: '6px 12px', fontSize: 20 }}>‹</button>
+                            <span style={{ fontSize: 15, fontWeight: 600, color: '#1a1a1a' }}>{MONTHS_FR[month]} {year}</span>
+                            <button onClick={() => { if (month === 11) { setMonth(0); setYear(y => y + 1); } else setMonth(m => m + 1); }} className="press" style={{ color: '#00965E', padding: '6px 12px', fontSize: 20 }}>›</button>
+                        </div>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', textAlign: 'center', padding: '0 8px' }}>
+                            {['L', 'M', 'M', 'J', 'V', 'S', 'D'].map((d, i) => (
+                                <div key={i} style={{ fontSize: 11, color: '#8e8e93', fontWeight: 600, paddingBottom: 6 }}>{d}</div>
+                            ))}
+                            {cells.map((d, i) => (
+                                <button key={i} onClick={() => d && setDay(d)} className="press" style={{
+                                    height: 38, borderRadius: 999, fontSize: 15,
+                                    background: d === day && d ? '#00965E' : 'transparent',
+                                    color: d === day && d ? 'white' : d ? '#1a1a1a' : 'transparent',
+                                    fontWeight: d === day ? 700 : 400,
+                                    border: d && d === today.getDate() && month === today.getMonth() && year === today.getFullYear() && d !== day ? '1px solid #00965E' : 'none',
+                                }}>{d}</button>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function DateField({ lbl, val, onChange }) {
+            const [open, setOpen] = useState(false);
+            const display = val ? new Date(val + 'T12:00:00').toLocaleDateString('fr-BE', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+            return (
+                <>
+                    <button onClick={() => setOpen(true)} className="press w-full text-left" style={{ background: 'white', borderRadius: 16, padding: '14px 16px', boxShadow: '0 1px 3px rgba(0,0,0,.06)', border: '1px solid #f0f0f5' }}>
+                        {val ? <div style={{ fontSize: 11, color: '#8e8e93', fontWeight: 500, marginBottom: 3 }}>{lbl}</div> : null}
+                        <div style={{ fontSize: 16, color: val ? '#1a1a1a' : '#8e8e93' }}>{display || lbl}</div>
+                    </button>
+                    {open && <DatePickerModal value={val} onChange={onChange} onClose={() => setOpen(false)} />}
+                </>
+            );
+        }
+
+        function BeneficiaryField({ toName, toIban, onChangeName, onChangeIban, favorites }) {
+            const [open, setOpen] = React.useState(false);
+            const filtered = favorites.filter(f => !toName || f.name.toUpperCase().includes(toName.toUpperCase()));
+            return (
+                <div>
+                    <div style={{ background: 'white', borderRadius: 16, padding: '14px 16px', boxShadow: '0 1px 3px rgba(0,0,0,.06)', border: '1px solid #f0f0f5' }}>
+                        {toName ? <label style={{ display: 'block', fontSize: 11, color: '#8e8e93', fontWeight: 500, marginBottom: 3 }}>Vers (nom du bénéficiaire)</label> : null}
+                        <input
+                            value={toName}
+                            onChange={e => { onChangeName(e.target.value); setOpen(true); }}
+                            onFocus={() => setOpen(true)}
+                            placeholder="Vers (nom du bénéficiaire)"
+                            style={{ fontSize: 16, color: '#1a1a1a', caretColor: '#00965E', width: '100%', background: 'transparent', border: 'none', outline: 'none', padding: 0 }}
+                        />
+                    </div>
+                    {open && filtered.length > 0 && (
+                        <div style={{ background: 'white', borderRadius: 16, overflow: 'hidden', boxShadow: '0 4px 16px rgba(0,0,0,.1)', border: '1px solid #f0f0f5', marginTop: 4 }}>
+                            {filtered.slice(0, 6).map((f, i) => (
+                                <button key={i} onMouseDown={() => { onChangeName(f.name); onChangeIban(f.iban || ''); setOpen(false); }} className="press w-full text-left" style={{ padding: '12px 16px', borderBottom: i < Math.min(filtered.length, 6) - 1 ? '1px solid #f0f0f5' : 'none', background: 'white' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                        <div style={{ width: 32, height: 32, borderRadius: '50%', background: f.own ? '#E8F5E9' : '#f0f0f5', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                            <span style={{ fontSize: 13, fontWeight: 700, color: f.own ? '#00965E' : '#666' }}>{f.name.charAt(0)}</span>
+                                        </div>
+                                        <div>
+                                            <p style={{ fontSize: 13, fontWeight: 600, color: '#1a1a1a' }}>{f.name.toUpperCase()}</p>
+                                            {f.iban && <p style={{ fontSize: 11, color: '#aaa', marginTop: 1 }}>{f.iban}</p>}
+                                            {f.own && <span style={{ fontSize: 9, color: 'white', background: '#00965E', padding: '1px 5px', borderRadius: 3, fontWeight: 700 }}>MON COMPTE</span>}
+                                        </div>
+                                    </div>
+                                </button>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        function IOSToggle({ checked, onChange }) {
+            return (
+                <div onClick={() => onChange(!checked)} style={{ width: 51, height: 31, borderRadius: 999, cursor: 'pointer', background: checked ? '#00965E' : '#d1d1d6', transition: 'background .22s', position: 'relative', flexShrink: 0, WebkitTapHighlightColor: 'transparent' }}>
+                    <div style={{ position: 'absolute', top: 2, left: checked ? 22 : 2, width: 27, height: 27, borderRadius: '50%', background: 'white', boxShadow: '0 2px 6px rgba(0,0,0,.28)', transition: 'left .22s' }} />
+                </div>
+            );
+        }
+
+        function ExecDateModal({ date, setDate, isInstant, setIsInstant, onClose }) {
+            const [localDate, setLocalDate] = useState(date);
+            const [localInstant, setLocalInstant] = useState(isInstant);
+            const [showCal, setShowCal] = useState(false);
+            const confirm = () => { setDate(localDate); setIsInstant(localInstant); onClose(); };
+            return (
+                <div className="fixed inset-0 z-[60] flex flex-col" style={{ zIndex: 60 }}>
+                    <div style={{ flex: 1, background: 'rgba(0,0,0,.4)' }} onClick={onClose} />
+                    <div style={{ background: '#f2f2f7', borderRadius: '22px 22px 0 0', paddingBottom: 'max(28px, env(safe-area-inset-bottom, 28px))' }} className="modal-up">
+                        <div style={{ display: 'flex', justifyContent: 'center', padding: '8px 0 0' }}>
+                            <div style={{ width: 38, height: 4, borderRadius: 2, background: '#d0d0d5' }} />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 20px 16px' }}>
+                            <span style={{ fontSize: 18, fontWeight: 700, color: '#1a1a1a' }}>Quand</span>
+                            <button onClick={onClose} style={{ color: '#00965E', fontSize: 16, fontWeight: 600, background: 'none', border: 'none', cursor: 'pointer' }} className="press">Annuler</button>
+                        </div>
+                        <div style={{ margin: '0 16px 10px', background: 'white', borderRadius: 14, overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,.06)' }}>
+                            <button onClick={() => setShowCal(true)} className="press w-full text-left" style={{ padding: '14px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'transparent', border: 'none', cursor: 'pointer', width: '100%' }}>
+                                <div>
+                                    <div style={{ fontSize: 11, color: '#8e8e93', fontWeight: 500, marginBottom: 3 }}>Date d'exécution</div>
+                                    <div style={{ fontSize: 16, color: '#1a1a1a' }}>
+                                        {new Date(localDate + 'T12:00:00').toLocaleDateString('fr-BE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
+                                    </div>
+                                </div>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c0c0c5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                            </button>
+                        </div>
+                        <div style={{ margin: '0 16px 8px', background: 'white', borderRadius: 14, overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,.06)' }}>
+                            <div style={{ padding: '14px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                <div>
+                                    <div style={{ fontSize: 16, fontWeight: 600, color: '#1a1a1a', marginBottom: 2 }}>Virement instantané</div>
+                                    <div style={{ fontSize: 13, color: '#8e8e93' }}>Gratuit</div>
+                                </div>
+                                <IOSToggle checked={localInstant} onChange={setLocalInstant} />
+                            </div>
+                        </div>
+                        <p style={{ margin: '6px 20px 18px', fontSize: 13, color: '#6b6b6b', lineHeight: 1.5 }}>
+                            Le montant sera instantanément disponible sur le compte du bénéficiaire.
+                        </p>
+                        <div style={{ padding: '0 16px' }}>
+                            <button onClick={confirm} className="press w-full" style={{ background: '#00965E', border: 'none', borderRadius: 14, padding: '16px', color: 'white', fontSize: 16, fontWeight: 700, cursor: 'pointer', width: '100%', letterSpacing: '.01em' }}>
+                                Continuer
+                            </button>
+                        </div>
+                        {showCal && <DatePickerModal value={localDate} onChange={(d) => { setLocalDate(d); setShowCal(false); }} onClose={() => setShowCal(false)} />}
+                    </div>
+                </div>
+            );
+        }
+
+        // ── Lookup IBAN → BIC / Banque via OpenIBAN ──────────────────────
+        async function lookupIban(rawIban) {
+            const iban = rawIban.replace(/\s+/g, '').toUpperCase();
+            // Validation basique avant appel API
+            if (!/^[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}$/.test(iban)) {
+                return { valid: false, error: 'Format IBAN invalide' };
+            }
+            try {
+                const url = `https://openiban.com/validate/${encodeURIComponent(iban)}?getBIC=true&validateBankCode=true`;
+                const res = await fetch(url);
+                if (!res.ok) throw new Error('API indisponible');
+                const data = await res.json();
+                if (!data.valid) {
+                    return { valid: false, error: 'IBAN invalide ou introuvable' };
+                }
+                return {
+                    valid: true,
+                    country: data.bankData?.name ? '' : '',
+                    bank_name: data.bankData?.name || '',
+                    bic: data.bankData?.bic || '',
+                };
+            } catch (e) {
+                return { valid: false, error: 'Service IBAN momentanément indisponible' };
+            }
+        }
+
+        function TransferModal({ balances, onSubmit, onCancel, defaultFromId, transfers }) {
+            const [fromId, setFromId] = useState(defaultFromId || CFG.accounts[0]?.id);
+            const [toName, setToName] = useState('');
+            const [toIban, setToIban] = useState('');
+            const [amount, setAmount] = useState('');
+            const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+            const [comm, setComm] = useState('');
+            const [step, setStep] = useState(1);
+            const [pick, setPick] = useState(false);
+            const [showFav, setShowFav] = useState(false);
+            const [loading, setLoading] = useState(false);
+            const [isInstant, setIsInstant] = useState(false);
+            const [showExecModal, setShowExecModal] = useState(false);
+            // Vérification BIC obligatoire pour virements ≥ 1000 EUR (réglementation EU)
+            const [bic, setBic] = useState('');
+            // ── IBAN lookup state ──
+            const [ibanInfo, setIbanInfo]       = useState(null);
+            const [ibanLoading, setIbanLoading] = useState(false);
+            const [ibanError, setIbanError]     = useState('');
+            const accounts = CFG.accounts.map(a => ({ ...a, balance: balances[a.id] ?? a.balance }));
+            const fromAcc = accounts.find(a => a.id === fromId);
+            const canNext = fromId && toName.trim() && amount && parseFloat(amount) > 0;
+
+            // ── Debounce IBAN lookup (600ms) ──────────────────────────────
+            useEffect(() => {
+                const cleaned = toIban.replace(/\s+/g, '').toUpperCase();
+                if (cleaned.length < 14) {
+                    setIbanInfo(null);
+                    setIbanError('');
+                    setIbanLoading(false);
+                    return;
+                }
+                setIbanLoading(true);
+                setIbanInfo(null);
+                setIbanError('');
+                const timer = setTimeout(async () => {
+                    const result = await lookupIban(cleaned);
+                    setIbanLoading(false);
+                    if (result.valid) {
+                        setIbanInfo(result);
+                        setIbanError('');
+                        if (result.bic) setBic(result.bic);
+                    } else {
+                        setIbanInfo(null);
+                        setIbanError(result.error || 'IBAN invalide');
+                    }
+                }, 600);
+                return () => clearTimeout(timer);
+            }, [toIban]);
+
+            const beneficiaries = useMemo(() => {
+                const seen = new Set();
+                const list = [];
+                CFG.accounts.forEach(a => {
+                    if (a.id !== fromId) { seen.add(a.label); list.push({ name: a.label, iban: a.iban, own: true }); }
+                });
+                (transfers || []).forEach(t => {
+                    if (t.to_name && !seen.has(t.to_name)) { seen.add(t.to_name); list.push({ name: t.to_name, iban: t.to_iban || '' }); }
+                });
+                return list;
+            }, [transfers, fromId]);
+
+            const filtered = beneficiaries.filter(f => !toName || f.name.toUpperCase().includes(toName.toUpperCase()));
+
+            const selectFav = (f) => {
+                setToName(f.name);
+                setToIban(f.iban || '');
+                setShowFav(false);
+            };
+
+            // Submit final commun aux deux flows (avec ou sans BIC).
+            // Le BIC est passé seulement s'il est renseigné (cas ≥ 1000 EUR).
+            const doSubmit = (bicValue) => {
+                setLoading(true);
+                setTimeout(() => {
+                    onSubmit({
+                        from_iban: fromAcc?.iban, from_id: fromId,
+                        to_name: toName.trim(), to_iban: toIban.trim() || '—',
+                        amount: -Math.abs(parseFloat(amount)),
+                        type: isInstant ? 'Virement instantané en euros' : 'Virement 2 à 3 jours ouvrables',
+                        date, comm: comm.trim(),
+                        ...(bicValue ? { bic: bicValue } : {}),
+                    });
+                }, 600);
+            };
+
+            const confirm = () => {
+                // BIC auto-rempli via lookup IBAN (transmis au PDF si disponible)
+                doSubmit(ibanInfo?.bic || bic || null);
+            };
+
+            // Confirm BIC : valide le format (8 ou 11 chars alphanumériques) puis submit.
+            const confirmBic = () => {
+                const v = bic.trim().toUpperCase().replace(/\s+/g, '');
+                if (!/^[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?$/.test(v)) {
+                    setBicError('Format BIC invalide (8 ou 11 caractères, ex: GEBABEBB)');
+                    return;
+                }
+                setShowBicVerify(false);
+                doSubmit(v);
+            };
+
+            return (
+                <div className="fixed inset-0 z-50 flex flex-col">
+                    <div style={{ flex: '0 0 64px', background: 'rgba(0,0,0,.35)' }} onClick={onCancel} />
+                    <div style={{ flex: 1, background: '#F2F2F7', display: 'flex', flexDirection: 'column', borderRadius: '24px 24px 0 0', overflow: 'hidden' }} className="modal-up">
+                        <div style={{ display: 'flex', justifyContent: 'center', padding: '8px 0 4px' }}><div style={{ width: 40, height: 4, borderRadius: 2, background: '#d0d0d5' }} /></div>
+                        <div style={{ background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 16px', borderBottom: '1px solid #f0f0f5' }}>
+                            <button onClick={onCancel} className="press" style={{ color: '#00965E', fontSize: 15, width: 64 }}>Annuler</button>
+                            <span style={{ fontSize: 16, fontWeight: 600, color: '#1a1a1a' }}>{step === 1 ? 'Faire un virement' : 'Confirmer'}</span>
+                            <button onClick={() => { setToName(''); setToIban(''); setAmount(''); setComm(''); setStep(1); setShowFav(false); setBic(''); setShowBicVerify(false); setBicError(''); }} className="press" style={{ color: '#aaa', fontSize: 15, width: 64, textAlign: 'right' }}>Effacer</button>
+                        </div>
+                        <div className="flex-1 scroll-ios" style={{ padding: 12, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                            {step === 1 ? <>
+                                <button onClick={() => setPick(v => !v)} className="press" style={{ background: 'white', borderRadius: 16, padding: '14px 16px', textAlign: 'left', boxShadow: '0 1px 3px rgba(0,0,0,.06)', border: '1px solid #f0f0f5', width: '100%' }}>
+                                    {fromAcc ? <>
+                                        <span style={{ display: 'block', fontSize: 11, color: '#8e8e93', fontWeight: 500, marginBottom: 3 }}>De</span>
+                                        <span style={{ fontSize: 16, color: '#1a1a1a' }}>{fromAcc.label} ···· {fromAcc.suffix}</span>
+                                        <span style={{ fontSize: 12, color: '#8e8e93', marginLeft: 8 }}>{fmt(fromAcc.balance)} EUR</span>
+                                    </> : <span style={{ fontSize: 16, color: '#8e8e93' }}>De</span>}
+                                </button>
+                                {pick && (
+                                    <div style={{ background: 'white', borderRadius: 16, overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,.06)', border: '1px solid #f0f0f5' }}>
+                                        {accounts.map(a => (
+                                            <button key={a.id} onClick={() => { setFromId(a.id); setPick(false); }} className="press w-full text-left" style={{ padding: '12px 16px', borderBottom: '1px solid #f0f0f5', background: a.id === fromId ? '#f0faf4' : 'white' }}>
+                                                <span style={{ fontSize: 14, fontWeight: 500, color: '#1a1a1a' }}>{a.label} ···· {a.suffix}</span>
+                                                <span style={{ fontSize: 12, color: '#aaa', marginLeft: 8 }}>{fmt(a.balance)} EUR</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+
+                                <div style={{ background: 'white', borderRadius: 16, boxShadow: '0 1px 3px rgba(0,0,0,.06)', border: '1px solid #f0f0f5', overflow: 'visible' }}>
+                                    <div style={{ padding: '14px 16px', borderBottom: toIban ? '1px solid #f0f0f5' : 'none' }}>
+                                        {toName ? <div style={{ fontSize: 11, color: '#8e8e93', fontWeight: 500, marginBottom: 3 }}>Vers (bénéficiaire)</div> : null}
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                            <input
+                                                value={toName}
+                                                onChange={e => { setToName(e.target.value); setShowFav(true); }}
+                                                onFocus={() => setShowFav(true)}
+                                                onBlur={() => setTimeout(() => setShowFav(false), 200)}
+                                                placeholder="Vers (bénéficiaire)"
+                                                style={{ flex: 1, fontSize: 16, color: '#1a1a1a', caretColor: '#00965E', background: 'transparent', border: 'none', outline: 'none', padding: 0, minWidth: 0 }}
+                                            />
+                                            {beneficiaries.length > 0 && (
+                                                <button onPointerDown={e => { e.preventDefault(); setShowFav(v => !v); }} style={{ color: showFav ? '#00965E' : '#bbb', fontSize: 18, lineHeight: 1, flexShrink: 0, background: 'none', border: 'none', padding: '0 2px', cursor: 'pointer' }}>★</button>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div style={{ padding: '14px 16px', borderTop: '1px solid #f0f0f5' }}>
+                                        {toIban ? <div style={{ fontSize: 11, color: '#8e8e93', fontWeight: 500, marginBottom: 3 }}>IBAN bénéficiaire</div> : null}
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                            <input
+                                                value={toIban}
+                                                onChange={e => {
+                                                    const v = e.target.value.replace(/[^A-Za-z0-9\s]/g, '').toUpperCase();
+                                                    setToIban(v);
+                                                }}
+                                                placeholder="IBAN bénéficiaire (optionnel)"
+                                                style={{ flex: 1, fontSize: 16, color: '#1a1a1a', caretColor: '#00965E', background: 'transparent', border: 'none', outline: 'none', padding: 0, fontFamily: 'monospace', letterSpacing: '.04em' }}
+                                            />
+                                            {ibanLoading && (
+                                                <div style={{ width: 16, height: 16, border: '2px solid #00965E', borderTopColor: 'transparent', borderRadius: '50%', flexShrink: 0, animation: 'spin 0.7s linear infinite' }} />
+                                            )}
+                                            {ibanInfo?.valid && !ibanLoading && (
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2DB34A" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><path d="M20 6L9 17l-5-5"/></svg>
+                                            )}
+                                        </div>
+                                        {/* ── Résultat lookup ── */}
+                                        {ibanInfo?.valid && !ibanLoading && (
+                                            <div style={{ marginTop: 8, background: '#F0FAF4', borderRadius: 10, padding: '8px 12px', display: 'flex', alignItems: 'center', gap: 8 }}>
+                                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00965E" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                                                <div style={{ minWidth: 0 }}>
+                                                    {ibanInfo.bank_name && <p style={{ fontSize: 12, fontWeight: 600, color: '#1a1a1a', margin: 0 }} className="truncate">{ibanInfo.bank_name}</p>}
+                                                    {ibanInfo.bic && <p style={{ fontSize: 11, color: '#00965E', margin: '1px 0 0', fontFamily: 'monospace', fontWeight: 600 }}>BIC : {ibanInfo.bic}</p>}
+                                                </div>
+                                            </div>
+                                        )}
+                                        {ibanError && !ibanLoading && toIban.replace(/\s/g,'').length >= 14 && (
+                                            <div style={{ marginTop: 6, display: 'flex', alignItems: 'center', gap: 5 }}>
+                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#E53935" strokeWidth="2.4"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                                <span style={{ fontSize: 12, color: '#E53935' }}>{ibanError}</span>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+
+                                {showFav && filtered.length > 0 && (
+                                    <div style={{ background: 'white', borderRadius: 16, overflow: 'hidden', boxShadow: '0 4px 16px rgba(0,0,0,.1)', border: '1px solid #f0f0f5' }}>
+                                        {filtered.slice(0, 6).map((f, i) => (
+                                            <button key={i} onPointerDown={() => selectFav(f)} className="press w-full text-left" style={{ padding: '12px 16px', borderBottom: i < Math.min(filtered.length, 6) - 1 ? '1px solid #f0f0f5' : 'none', background: 'white', WebkitTapHighlightColor: 'transparent' }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                                    <div style={{ width: 34, height: 34, borderRadius: '50%', background: f.own ? '#E8F5E9' : '#f5f5f5', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                                        <span style={{ fontSize: 13, fontWeight: 700, color: f.own ? '#00965E' : '#888' }}>{f.name.charAt(0)}</span>
+                                                    </div>
+                                                    <div style={{ minWidth: 0 }}>
+                                                        <p style={{ fontSize: 13, fontWeight: 600, color: '#1a1a1a', margin: 0 }} className="truncate">{f.name.toUpperCase()}</p>
+                                                        {f.iban && <p style={{ fontSize: 11, color: '#aaa', margin: '2px 0 0' }} className="truncate">{f.iban}</p>}
+                                                        {f.own && <span style={{ fontSize: 9, color: 'white', background: '#00965E', padding: '1px 5px', borderRadius: 3, fontWeight: 700 }}>MON COMPTE</span>}
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+
+                                <TransferField lbl="Montant en EUR" val={amount} onChange={setAmount} type="number" />
+
+                                {/* ── Bouton Date d'exécution ── */}
+                                <button onClick={() => setShowExecModal(true)} className="press w-full text-left" style={{ background: 'white', borderRadius: 16, padding: '14px 16px', boxShadow: '0 1px 3px rgba(0,0,0,.06)', border: '1px solid #f0f0f5', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                    <div>
+                                        <div style={{ fontSize: 11, color: '#8e8e93', fontWeight: 500, marginBottom: 3 }}>Date d'exécution</div>
+                                        <div style={{ fontSize: 16, color: '#1a1a1a', fontWeight: 500 }}>
+                                            {isInstant ? "Aujourd'hui · Virement instantané" : new Date(date + 'T12:00:00').toLocaleDateString('fr-BE', { day: 'numeric', month: 'long', year: 'numeric' })}
+                                        </div>
+                                    </div>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8e8e93" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                </button>
+                                {showExecModal && <ExecDateModal date={date} setDate={setDate} isInstant={isInstant} setIsInstant={setIsInstant} onClose={() => setShowExecModal(false)} />}
+
+                                <TransferField lbl="Communication (optionnel)" val={comm} onChange={setComm} />
+                            </> : (
+                                <div style={{ background: 'white', borderRadius: 16, overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,.06)', border: '1px solid #f0f0f5' }}>
+                                    {[
+                                        ['De', `${fromAcc?.label} ···· ${fromAcc?.suffix}`],
+                                        ['Vers', toName.toUpperCase()],
+                                        ['IBAN', toIban || '—'],
+                                        ['Montant', `${amount} EUR`],
+                                        ['Délai', isInstant ? 'Immédiat' : '2 à 3 jours ouvrables'],
+                                        ['Date', isInstant ? "Aujourd'hui" : new Date(date + 'T12:00:00').toLocaleDateString('fr-BE', { day: 'numeric', month: 'long', year: 'numeric' })],
+                                        ['Communication', comm || '—'],
+                                    ].map(([k, v]) => (
+                                        <div key={k} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '13px 16px', borderBottom: '1px solid #f0f0f5' }}>
+                                            <span style={{ fontSize: 13, color: '#888', flexShrink: 0 }}>{k}</span>
+                                            <span style={{ fontSize: 13, fontWeight: 600, color: k === 'Délai' && v === 'Immédiat' ? '#00965E' : '#1a1a1a', textAlign: 'right', maxWidth: '60%', wordBreak: 'break-word' }}>{v}</span>
+                                        </div>
+                                    ))}
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '14px 16px', background: '#E8F5E9' }}>
+                                        <span style={{ fontSize: 16, fontWeight: 700, color: '#1a1a1a' }}>Total débité</span>
+                                        <span style={{ fontSize: 20, fontWeight: 900, color: '#00965E' }}>-{amount} EUR</span>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                        <div style={{ padding: '12px 16px', background: '#F2F2F7', paddingBottom: 'max(24px, env(safe-area-inset-bottom, 24px))' }}>
+                            {step === 1 ? (
+                                <button onClick={() => canNext && setStep(2)} className="press w-full rounded-2xl py-4" style={{ background: canNext ? '#2DB34A' : '#e0e0e5', color: canNext ? 'white' : '#aaa', fontSize: 16, fontWeight: 600, boxShadow: canNext ? '0 4px 12px rgba(45,179,74,.3)' : 'none' }}>
+                                    Suivant
+                                </button>
+                            ) : <>
+                                <button onClick={confirm} disabled={loading} className="press w-full rounded-2xl py-4 flex items-center justify-center gap-2" style={{ background: '#2DB34A', color: 'white', fontSize: 16, fontWeight: 600, boxShadow: '0 4px 12px rgba(45,179,74,.3)' }}>
+                                    {loading
+                                        ? <><div style={{ width: 20, height: 20, border: '2px solid white', borderTopColor: 'transparent', borderRadius: '50%' }} className="animate-spin" />En cours...</>
+                                        : <><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.2"><path d="M20 6L9 17l-5-5" /></svg>Confirmer le virement</>
+                                    }
+                                </button>
+                                <button onClick={() => setStep(1)} className="press w-full py-3 mt-1" style={{ color: '#00965E', fontSize: 14 }}>← Modifier</button>
+                            </>}
+                        </div>
+                    </div>
+                    {false && (
+                        <BicVerifyOverlay
+                            amount={amount}
+                            toName={toName}
+                            bic={bic}
+                            setBic={(v) => { setBic(v); }}
+                            error={''}
+                            onCancel={() => { }}
+                            onConfirm={confirmBic}
+                        />
+                    )}
+                </div>
+            );
+        }
+
+        // Popup vérification BIC (virements ≥ 1000 EUR).
+        // Overlay centered au-dessus du TransferModal — le step 2 reste visible
+        // derrière (semi-transparent) pour respecter la demande "ne pas supprimer
+        // les infos déjà existantes".
+        function BicVerifyOverlay({ amount, toName, bic, setBic, error, onCancel, onConfirm }) {
+            return (
+                <div className="fixed inset-0 z-[110] flex items-center justify-center" style={{ background: 'rgba(0,0,0,.55)', padding: 18, animation: 'fadeIn .18s ease' }}>
+                    <div style={{ background: 'white', borderRadius: 20, width: '100%', maxWidth: 380, padding: '22px 22px 18px', boxShadow: '0 16px 40px rgba(0,0,0,.25)', animation: 'popIn .28s cubic-bezier(.34,1.1,.64,1) both' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
+                            <div style={{ width: 42, height: 42, borderRadius: '50%', background: '#E8F5E9', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00965E" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M12 2L3 7v6c0 5 3.8 9.4 9 10 5.2-.6 9-5 9-10V7l-9-5z" />
+                                    <path d="M9 12l2 2 4-4" />
+                                </svg>
+                            </div>
+                            <div style={{ minWidth: 0 }}>
+                                <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1a1a1a', margin: 0, lineHeight: 1.2 }}>Vérification du virement</h3>
+                                <p style={{ fontSize: 12, color: '#888', margin: '3px 0 0' }}>Sécurité renforcée — Réglementation EU</p>
+                            </div>
+                        </div>
+                        <p style={{ fontSize: 13, color: '#3a3a3a', lineHeight: 1.5, margin: '0 0 14px' }}>
+                            Conformément à la directive européenne sur les services de paiement (DSP2), tout virement d'un montant supérieur ou égal à <strong>1 000 EUR</strong> nécessite la validation du code <strong>BIC</strong> (Bank Identifier Code) du compte bénéficiaire.
+                        </p>
+                        <div style={{ background: '#F2F2F7', borderRadius: 12, padding: '10px 14px', marginBottom: 14, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <div style={{ minWidth: 0 }}>
+                                <p style={{ fontSize: 11, color: '#8e8e93', margin: 0, fontWeight: 500 }}>Bénéficiaire</p>
+                                <p style={{ fontSize: 13, fontWeight: 600, color: '#1a1a1a', margin: '2px 0 0', textTransform: 'uppercase' }} className="truncate">{toName}</p>
+                            </div>
+                            <span style={{ fontSize: 15, fontWeight: 800, color: '#00965E', flexShrink: 0, marginLeft: 12 }}>{amount} EUR</span>
+                        </div>
+                        <label style={{ display: 'block', fontSize: 11, fontWeight: 600, color: '#8e8e93', textTransform: 'uppercase', letterSpacing: '.04em', marginBottom: 6 }}>Code BIC du destinataire</label>
+                        <input
+                            type="text"
+                            value={bic}
+                            onChange={e => setBic(e.target.value.toUpperCase())}
+                            placeholder="Ex: GEBABEBB"
+                            maxLength={11}
+                            autoFocus
+                            style={{ width: '100%', fontSize: 16, color: '#1a1a1a', caretColor: '#00965E', background: '#F2F2F7', border: `1.5px solid ${error ? '#E53935' : '#e0e0e5'}`, borderRadius: 12, padding: '12px 14px', outline: 'none', letterSpacing: '.08em', fontFamily: 'monospace', textTransform: 'uppercase' }}
+                        />
+                        {error && (
+                            <p style={{ fontSize: 12, color: '#E53935', margin: '6px 2px 0', display: 'flex', alignItems: 'center', gap: 5 }}>
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#E53935" strokeWidth="2.4"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
+                                {error}
+                            </p>
+                        )}
+                        <p style={{ fontSize: 11, color: '#8e8e93', margin: '8px 2px 18px', lineHeight: 1.4 }}>
+                            Le code BIC est généralement composé de 8 ou 11 caractères. Vous le trouverez sur les coordonnées bancaires de votre destinataire.
+                        </p>
+                        <div style={{ display: 'flex', gap: 10 }}>
+                            <button onClick={onCancel} className="press" style={{ flex: 1, background: '#F2F2F7', color: '#1a1a1a', borderRadius: 12, padding: '12px 0', fontSize: 15, fontWeight: 600, border: 'none' }}>
+                                Annuler
+                            </button>
+                            <button onClick={onConfirm} className="press" style={{ flex: 1.4, background: '#2DB34A', color: 'white', borderRadius: 12, padding: '12px 0', fontSize: 15, fontWeight: 600, border: 'none', boxShadow: '0 4px 12px rgba(45,179,74,.25)' }}>
+                                Valider
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Scanner indisponible : ouvre la caméra arrière (preview ~1.4s),
+        // puis affiche un message d'erreur "Service momentanément indisponible".
+        // Tracks stoppés au démontage. En cas de refus / HTTPS-only / no-camera,
+        // on bascule directement sur le message d'erreur (UX cohérente).
+        function ScannerOverlay({ onClose }) {
+            const videoRef = React.useRef(null);
+            const streamRef = React.useRef(null);
+            const [showError, setShowError] = useState(false);
+            const [streamReady, setStreamReady] = useState(false);
+
+            useEffect(() => {
+                let cancelled = false;
+                let errorTimer = null;
+
+                const stopStream = () => {
+                    if (streamRef.current) {
+                        streamRef.current.getTracks().forEach(t => t.stop());
+                        streamRef.current = null;
+                    }
+                };
+
+                async function start() {
+                    if (!navigator.mediaDevices?.getUserMedia) {
+                        if (!cancelled) setShowError(true);
+                        return;
+                    }
+                    try {
+                        // Tente d'abord facingMode=environment strict (mobile),
+                        // fallback ideal puis any si non dispo (desktop, etc.)
+                        let stream;
+                        try {
+                            stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: 'environment' } }, audio: false });
+                        } catch {
+                            stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false });
+                        }
+                        if (cancelled) { stream.getTracks().forEach(t => t.stop()); return; }
+                        streamRef.current = stream;
+                        if (videoRef.current) {
+                            videoRef.current.srcObject = stream;
+                            try { await videoRef.current.play(); } catch { /* autoplay block tolerée */ }
+                        }
+                        setStreamReady(true);
+                        // Délai court pour donner l'impression d'une vraie tentative
+                        // de scan, puis bascule sur l'erreur.
+                        errorTimer = setTimeout(() => { if (!cancelled) setShowError(true); }, 1400);
+                    } catch (e) {
+                        // Refus permission, navigator non-HTTPS, no camera, etc.
+                        if (!cancelled) setShowError(true);
+                    }
+                }
+                start();
+
+                return () => {
+                    cancelled = true;
+                    if (errorTimer) clearTimeout(errorTimer);
+                    stopStream();
+                };
+            }, []);
+
+            return (
+                <div className="fixed inset-0 z-[120]" style={{ background: '#000' }}>
+                    {/* Video stream caméra arrière (visible avant l'erreur) */}
+                    <video ref={videoRef} playsInline muted autoPlay style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: streamReady && !showError ? 1 : (showError ? 0.4 : 0) }} />
+                    {/* Overlay viseur (cadre de scan, avant erreur) */}
+                    {streamReady && !showError && (
+                        <>
+                            <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,.35)' }} />
+                            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 240, height: 240, border: '3px solid white', borderRadius: 16, boxShadow: '0 0 0 9999px rgba(0,0,0,.45)' }}>
+                                <div style={{ position: 'absolute', top: 0, left: 0, width: 36, height: 36, borderTop: '4px solid #2DB34A', borderLeft: '4px solid #2DB34A', borderTopLeftRadius: 16 }} />
+                                <div style={{ position: 'absolute', top: 0, right: 0, width: 36, height: 36, borderTop: '4px solid #2DB34A', borderRight: '4px solid #2DB34A', borderTopRightRadius: 16 }} />
+                                <div style={{ position: 'absolute', bottom: 0, left: 0, width: 36, height: 36, borderBottom: '4px solid #2DB34A', borderLeft: '4px solid #2DB34A', borderBottomLeftRadius: 16 }} />
+                                <div style={{ position: 'absolute', bottom: 0, right: 0, width: 36, height: 36, borderBottom: '4px solid #2DB34A', borderRight: '4px solid #2DB34A', borderBottomRightRadius: 16 }} />
+                            </div>
+                            <p style={{ position: 'absolute', top: 'calc(50% + 145px)', left: 0, right: 0, textAlign: 'center', color: 'white', fontSize: 14, fontWeight: 500, textShadow: '0 1px 4px rgba(0,0,0,.6)' }}>Recherche d'un code à scanner...</p>
+                        </>
+                    )}
+                    {/* Erreur "Service momentanément indisponible" */}
+                    {showError && (
+                        <div className="fixed inset-0 flex items-center justify-center" style={{ background: 'rgba(0,0,0,.55)', padding: 18, animation: 'fadeIn .2s ease', zIndex: 1 }}>
+                            <div style={{ background: 'white', borderRadius: 20, width: '100%', maxWidth: 340, padding: '26px 22px 18px', boxShadow: '0 16px 40px rgba(0,0,0,.3)', animation: 'popIn .28s cubic-bezier(.34,1.1,.64,1) both' }}>
+                                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 14 }}>
+                                    <div style={{ width: 56, height: 56, borderRadius: '50%', background: '#FFF4E5', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F4A100" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                                            <line x1="12" y1="9" x2="12" y2="13" />
+                                            <line x1="12" y1="17" x2="12.01" y2="17" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1a1a1a', margin: '0 0 8px', textAlign: 'center' }}>Service momentanément indisponible</h3>
+                                <p style={{ fontSize: 13, color: '#5a5a5a', lineHeight: 1.5, margin: '0 0 20px', textAlign: 'center' }}>
+                                    Le service de scan n'est pas accessible pour le moment. Veuillez réessayer ultérieurement ou contacter le support si le problème persiste.
+                                </p>
+                                <button onClick={onClose} className="press" style={{ width: '100%', background: '#00965E', color: 'white', borderRadius: 12, padding: '12px 0', fontSize: 15, fontWeight: 600, border: 'none', boxShadow: '0 4px 12px rgba(0,150,94,.25)' }}>
+                                    OK
+                                </button>
+                            </div>
+                        </div>
+                    )}
+                    {/* Bouton fermeture (toujours dispo, en haut à droite) */}
+                    {!showError && (
+                        <button onClick={onClose} className="press" style={{ position: 'absolute', top: 'max(20px, env(safe-area-inset-top, 20px))', right: 16, width: 38, height: 38, borderRadius: '50%', background: 'rgba(0,0,0,.45)', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.4" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+                        </button>
+                    )}
+                </div>
+            );
+        }
+
+        function App() {
+            const [screen, setScreen] = useState('loading');
+            const [transfers, setTransfers] = useState([]);
+            const [balances, setBalances] = useState({});
+            const [selAcc, setSelAcc] = useState(null);
+            const [selTx, setSelTx] = useState(null);
+            const [showXfer, setShowXfer] = useState(false);
+            const [showSuccess, setShowSuccess] = useState(null);
+            const [showScanner, setShowScanner] = useState(false);
+            const go = s => setScreen(s);
+
+            useEffect(() => {
+                serverLoad().then(({ transfers, balances }) => {
+                    setTransfers(transfers);
+                    setBalances(balances);
+                    setScreen('splash');
+                });
+            }, []);
+
+            useEffect(() => {
+                const map = { loading: '#ffffff', splash: '#ffffff', welcome: '#0a0a0a', pin: '#F2F2F7', dashboard: '#F2F2F7', transactions: '#F2F2F7', txDetail: '#F2F2F7' };
+                const bg = map[screen] || '#F2F2F7';
+                document.body.style.background = bg;
+                document.getElementById('root').style.background = bg;
+            }, [screen]);
+
+            const handleTransfer = ({ from_iban, from_id, to_name, to_iban, amount, type, date, comm, bic }) => {
+                const newT = { id: Date.now(), from_iban, to_name, to_iban, amount: parseFloat(amount), type, date, comm, ...(bic ? { bic } : {}), created_at: new Date().toISOString() };
+                const updated = [newT, ...transfers];
+                const newBal = { ...balances, [from_id]: Math.round(((balances[from_id] ?? 0) + parseFloat(amount)) * 100) / 100 };
+                setTransfers(updated);
+                setBalances(newBal);
+                serverSave(updated, newBal);
+                setShowXfer(false);
+                setShowSuccess({ amount: parseFloat(amount), toName: to_name });
+            };
+
+            return (
+                <div style={{ position: 'fixed', top: 0, left: 0, right: 0, height: '100svh', overflow: 'hidden', background: 'white', maxWidth: 430, margin: '0 auto' }}>
+                    {screen === 'loading' && <div className="fixed inset-0 bg-white flex items-center justify-center"><img src="./logo.svg" width={120} style={{ objectFit: 'contain' }} alt="" /></div>}
+                    {screen === 'splash' && <SplashScreen onDone={() => go('welcome')} />}
+                    {screen === 'welcome' && <WelcomeScreen onConnect={() => go('pin')} onScanner={() => setShowScanner(true)} />}
+                    {screen === 'pin' && <PinScreen onBack={() => go('welcome')} onSuccess={() => go('dashboard')} />}
+                    {screen === 'dashboard' && <Dashboard transfers={transfers} balances={balances} onAccountClick={a => { setSelAcc(a); go('transactions'); }} onTransfer={() => setShowXfer(true)} onScanner={() => setShowScanner(true)} />}
+                    {screen === 'transactions' && selAcc && <TransactionsPage account={selAcc} transfers={transfers} balances={balances} onBack={() => go('dashboard')} onTransfer={() => setShowXfer(true)} onTxClick={t => { setSelTx(t); go('txDetail'); }} />}
+                    {screen === 'txDetail' && selTx && <TransactionDetail tx={selTx} onBack={() => go('transactions')} />}
+                    {showXfer && <TransferModal balances={balances} transfers={transfers} defaultFromId={selAcc?.id || CFG.accounts[0]?.id} onSubmit={handleTransfer} onCancel={() => setShowXfer(false)} />}
+                    {showSuccess && <SuccessOverlay amount={showSuccess.amount} toName={showSuccess.toName} onClose={() => setShowSuccess(null)} />}
+                    {showScanner && <ScannerOverlay onClose={() => setShowScanner(false)} />}
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script>
+        (function () {
+            var src = document.getElementById('app-source').textContent;
+            var out = Babel.transform(src, {
+                presets: [['react', { runtime: 'classic' }]]
+            }).code;
+            var s = document.createElement('script');
+            s.textContent = out;
+            document.body.appendChild(s);
+        })();
+    </script>
+</body>
+
+</html>
